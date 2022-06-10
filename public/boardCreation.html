@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Settings</title>
+</head>
+<body>
+
+
+<form class="settings" action="board.html" method="get">
+    <h1 class="title">Settings</h1>
+
+    <div class="input">
+        <input type="text" name="boardName" id="boardname" placeholder="Name of your Board">
+
+    </div>
+    <div class="input">
+        <input type="text" name="userName" id="username" placeholder="Username">
+    </div>
+    <button class="btn_create" id="createButton" >Create Todolist</button>
+</form>
+
+
+
+<script>
+    const createButton = document.getElementById("createButton");
+    createButton.addEventListener("click", function() {
+        if (document.getElementById("boardname").value && document.getElementById("username").value) {
+            localStorage.setItem("boardname", document.getElementById("boardname").value)
+            localStorage.setItem("username", document.getElementById("username").value)
+
+        }
+    })
+</script>
+
+
+
+</body>
+</html>
+
+<style>
+    .title {
+        text-align: center;
+        margin-bottom: 5%;
+    }
+    .btn_create {
+        text-align: center;
+        margin-left: 48%;
+        margin-right: 48%;
+        margin-top: 20%;
+    }
+    .settings {
+        background-color: beige;
+        margin-top: 8%;
+        margin-right: 35%;
+        margin-left: 35%;
+        padding-left: 4%;
+        padding-right: 4%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        border-radius: 35px;
+    }
+    .input {
+        margin-top: 10%;
+    }
+    body {
+        background: rgb(220,241,10);
+        background: linear-gradient(90deg, rgba(220,241,10,1) 26%, rgba(15,164,135,1) 100%);
+    }
+</style>

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo-Board</title>
+</head>
+<body>
+
+<div class="nav">
+    <p id="boardname">Todo-Board von</p>
+</div>
+
+
+<section class="boardcreation">
+    <form>
+        <div class="input-group">
+            <label for="name">Taskname</label><br>
+            <input class="text" id="name" name="name" type="text"/>
+        </div>
+
+        <div class="input-group">
+            <label for="description">Description</label><br>
+            <input class="text" id="description" name="description"/>
+        </div>
+        <br>
+        <button id="btn" type="submit">Create</button>
+    </form>
+</section>
+
+
+<!--
+<div class="results">
+    <pre></pre>
+</div>
+-->
+
+
+<div class=list>
+
+    <div class="overlay">
+        <h2>TODO</h2>
+        <div class="todo container">
+
+
+        </div>
+    </div>
+
+    <div class="overlay">
+        <h2>DOING</h2>
+        <div class="container">
+
+        </div>
+    </div>
+
+    <div class="overlay">
+        <h2>DONE</h2>
+        <div class="container">
+
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+
+    const nameInput = document.getElementById("name");
+    const descriptionInput = document.getElementById("description");
+    nameInput.value = "";
+    descriptionInput.value = "";
+
+
+    function handleFormSubmit(event) {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const formJSON = Object.fromEntries(data.entries());
+
+        fetch("/new", {method: "post", body: data}).then(res => {
+            //const results = document.querySelector('.results pre');
+            //results.innerText = JSON.stringify(formJSON, null, 2);
+
+            nameInput.value = "";
+            descriptionInput.value = "";
+        })
+        taskOutput()
+    }
+
+    const form = document.querySelector('.boardcreation');
+    form.addEventListener('submit', handleFormSubmit);
+    const lists = document.getElementsByClassName("container")
+
+
+    function taskOutput() {
+
+        fetch("/output", {method: "get"}).then(res => {
+            return res.json()
+        }).then((data) => {
+            const taskToDo = document.getElementsByClassName("todo")[0];
+            taskToDo.innerHTML = "";
+            data.forEach(task => {
+                let taskElement = document.createElement("div")
+                taskElement.dataset.taskId = task.id
+                taskElement.classList.add('todos')
+                taskElement.draggable = true;
+                let name = document.createElement("p")
+                let description = document.createElement("p")
+                taskElement.appendChild(name)
+                taskElement.appendChild(description)
+                name.innerText = task.name
+                description.innerText = task.description
+
+                Array.from(lists)[task.list].appendChild(taskElement)
+
+
+                //drag and drop
+                const draggables = document.querySelectorAll('.todos');
+                const containers = document.querySelectorAll('.container');
+
+                draggables.forEach(draggable => {
+                    draggable.addEventListener('dragstart', () => {
+                        draggable.classList.add('dragging')
+                        console.log('draggstart')
+                    })
+                    draggable.addEventListener('dragend', () => {
+                        const data = new FormData();
+                        data.append("id", draggable.dataset.taskId)
+                        data.append("list", Array.from(lists).indexOf(draggable.parentElement))
+
+                        fetch("/update", {method: "post", body: data})
+                    })
+                })
+
+                containers.forEach(container => {
+                    container.addEventListener('dragover', () => {
+                        console.log('dragover')
+                        const draggable = document.querySelector('.dragging')
+                        container.appendChild(draggable)
+                    })
+
+
+                })
+            })
+        })
+
+    }
+
+    taskOutput();
+
+
+
+    const reload = document
+
+
+</script>
+
+
+</body>
+</html>
+
+
+<style>
+    body {
+        margin: 0;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: row;
+        padding: 1%;
+        background-color: #9a9a9a;
+margin: 0;
+    }
+
+    #boardname {
+        color: #000000;
+    }
+
+    .boardcreation {
+        margin-top: 20px;
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: baseline;
+        align-content: stretch;
+        background-color: #d3d3d3;
+        border-radius: 35px;
+        margin-right: 30%;
+        margin-left: 30%;
+        margin-bottom: 10%;
+        border: 1px solid black;
+
+    }
+
+    .boardcreation button {
+        justify-content: center;
+    }
+
+    .text {
+        margin-top: 2%;
+        margin-bottom: 5%;
+    }
+
+    .list {
+        position: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        align-items: baseline;
+        align-content: stretch;
+    }
+
+    .overlay {
+        background-color: #9a9a9a;
+        padding: 1%;
+        width: 30%;
+    }
+
+    .overlay h2 {
+        text-align: center;
+        padding: 1%;
+        border: 1px solid black;
+        background-color: #d3d3d3;
+    }
+
+    .todos {
+        border: 1px solid black;
+        background-color: #f8f0f8;
+        padding: 1%;
+        margin-bottom: 1rem;
+    }
+
+    .draggable.dragging {
+        opacity: 0.2%;
+    }
+
+    .container {
+        padding-top: 5%;
+        background-color: #60abe0;
+    }
+
+</style>
