@@ -8,6 +8,9 @@
     <title>Settings</title>
 </head>
 <body>
+<div class="nav">
+    <p>Todo-Board von</p>
+</div>
 
 
 <form class="settings" action="board.html" method="get">
@@ -20,14 +23,13 @@
     <div class="input">
         <input type="text" name="userName" id="username" placeholder="Username">
     </div>
-    <button class="btn_create" id="createButton" >Create Todolist</button>
+    <button class="btn_create" id="createButton">Create Todolist</button>
 </form>
-
 
 
 <script>
     const createButton = document.getElementById("createButton");
-    createButton.addEventListener("click", function() {
+    createButton.addEventListener("click", function () {
         if (document.getElementById("boardname").value && document.getElementById("username").value) {
             localStorage.setItem("boardname", document.getElementById("boardname").value)
             localStorage.setItem("username", document.getElementById("username").value)
@@ -35,7 +37,6 @@
         }
     })
 </script>
-
 
 
 </body>
@@ -46,12 +47,14 @@
         text-align: center;
         margin-bottom: 5%;
     }
+
     .btn_create {
         text-align: center;
         margin-left: 48%;
         margin-right: 48%;
         margin-top: 20%;
     }
+
     .settings {
         background-color: beige;
         margin-top: 8%;
@@ -63,11 +66,22 @@
         padding-bottom: 1%;
         border-radius: 35px;
     }
+
     .input {
         margin-top: 10%;
     }
+
     body {
-        background: rgb(220,241,10);
-        background: linear-gradient(90deg, rgba(220,241,10,1) 26%, rgba(15,164,135,1) 100%);
+        background: rgb(10, 150, 241);
+        background: linear-gradient(90deg, rgba(10, 150, 241, 1) 26%, rgba(34, 219, 249, 1) 100%);
+        margin: 0;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: row;
+        padding: 1%;
+        background-color: #9a9a9a;
+        margin: 0;
     }
 </style>

@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class Controller extends AbstractController
 {
     const TASKS_JSON_PATH = __DIR__ . "/tasks.json";
+
     /**
      * @Route("/", name="index")
      */
@@ -43,7 +44,7 @@ class Controller extends AbstractController
 
 
         foreach ($tasks as $nr => $task) {
-            if($task["id"] == $request->get("id")) {
+            if ($task["id"] == $request->get("id")) {
                 $task["name"] = $request->get("name") !== null ? $request->get("name") : $task["name"];
                 $task["description"] = $request->get("description") !== null ? $request->get("description") !== null : $task["description"];
                 $task["list"] = intval($request->get("list"));
@@ -67,13 +68,15 @@ class Controller extends AbstractController
     }
 
 
-    private function loadTasks() {
+    private function loadTasks()
+    {
         $contentArray = file_get_contents(self::TASKS_JSON_PATH);
-        if($contentArray == "") return [];
+        if ($contentArray == "") return [];
         return json_decode($contentArray, true);
     }
 
-    private function saveTasks($tasks) {
+    private function saveTasks($tasks)
+    {
         $tasksAsJson = json_encode($tasks);
         file_put_contents(self::TASKS_JSON_PATH, $tasksAsJson);
     }

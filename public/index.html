@@ -8,24 +8,65 @@
     <title>Todo-Broard</title>
 </head>
 <body>
+<div class="nav">
+</div>
 <h1 class="welcome">Welcome on my Todo-Board</h1>
-<button class="btn_create" onclick="window.location.href='boardCreation.html'">Create Todolist</button>
 
+<div class="starsite">
+    <div>
+        <img src="./board.png" alt="bild" width="600" height="auto">
+    </div>
+    <div>
+        <p><b>Projektidee</b><br>Ich wollte etwas im Web machen, das auch einen eigenen Nutzen gewährleisten kann.<br>
+            Da ich auch in meinen Weiteren Lehrjahren mit PHP(Symfony) arbeiten werde und ich das unbedingt<br>
+            in einem Projekt anwenden wollte,<br>
+            dachte ich, dass ich das Backend mit PHP(Symfony) zu machen.<br>
+            Durch einen Lernenden, bin ich dann auf das Trello-Board gekommen, und dachte, dass ich das eine gute
+            Vorlage ist.<br>
+            So habe ich mein Projekt gefunden.</p>
+    </div>
+
+
+</div>
+<button class="btn_create" onclick="window.location.href='boardCreation.html'">Create Todolist</button>
 
 
 <style>
     h1 {
         text-align: center;
     }
+
     .btn_create {
         text-align: center;
         margin-left: 48%;
         margin-right: 48%;
-        margin-top: 20%;
+        margin-top: 2%;
     }
+
     body {
-        background: rgb(220,241,10);
-        background: linear-gradient(90deg, rgba(220,241,10,1) 26%, rgba(15,164,135,1) 100%);
+        background: rgb(10, 150, 241);
+        background: linear-gradient(90deg, rgba(10, 150, 241, 1) 26%, rgba(34, 219, 249, 1) 100%);
+        margin: 0;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: row;
+        padding: 1%;
+        background-color: #000000;
+        color: white;
+        margin: 0;
+        padding: 2%;
+    }
+
+    .starsite {
+        margin-top: 3%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        align-content: stretch;
     }
 </style>
 
