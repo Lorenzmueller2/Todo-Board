@@ -10,8 +10,18 @@
 <body>
 
 <div class="nav">
-    <p id="boardname">Todo-Board von</p>
+    <div>
+    </div>
+
+    <img class="logo" src="logo2.png" alt="logo">
+
+    <div>
+    <p>Made by Lorenz</p>
+    </div>
+
 </div>
+
+<div class="background">
 
 
 <section class="boardcreation">
@@ -65,6 +75,8 @@
 
 </div>
 
+</div>
+
 <script>
 
     const nameInput = document.getElementById("name");
@@ -82,7 +94,6 @@
         fetch("/new", {method: "post", body: data}).then(res => {
             //const results = document.querySelector('.results pre');
             //results.innerText = JSON.stringify(formJSON, null, 2);
-
             nameInput.value = "";
             descriptionInput.value = "";
         }).then(() => {
@@ -131,6 +142,7 @@
                         const data = new FormData();
                         data.append("id", draggable.dataset.taskId)
                         data.append("list", Array.from(lists).indexOf(draggable.parentElement))
+                        draggable.classList.remove("dragging")
 
                         fetch("/update", {method: "post", body: data})
                     })
@@ -148,11 +160,8 @@
                 })
             })
 
-            const reload = document.getElementById(btn);
-
 
         })
-
     }
 
     taskOutput();
@@ -167,6 +176,8 @@
 
 <style>
     body {
+        background: rgb(10, 150, 241);
+        background: linear-gradient(90deg, rgba(10, 150, 241, 1) 26%, rgba(34, 219, 249, 1) 100%);
         margin: 0;
     }
 
@@ -174,13 +185,14 @@
         display: flex;
         flex-direction: row;
         padding: 1%;
-        background-color: #9a9a9a;
+        background-color: #1a3062;
+        color: white;
         margin: 0;
+        padding: 1%;
+        text-align: center;
+        justify-content: space-between;
     }
 
-    #boardname {
-        color: #000000;
-    }
 
     .boardcreation {
         margin-top: 20px;
@@ -244,8 +256,14 @@
     }
 
     .container {
-        padding-top: 5%;
-        background-color: #60abe0;
+        padding: 1%;
+        background-color: #d3d3d3;
+        border: 1px solid black;
+    }
+
+    .logo {
+        width: 10%;
+        height: auto;
     }
 
 </style>

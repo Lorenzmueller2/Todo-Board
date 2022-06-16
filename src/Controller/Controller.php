@@ -27,7 +27,9 @@ class Controller extends AbstractController
     {
         $request = Request::createFromGlobals();
         $tasks = $this->loadTasks();
-        $newTask = ["id" => count($tasks), "name" => $request->get("name"), "description" => $request->get("description"), "list" => 0];
+        $newTask = ["id" => count($tasks), "name" => $request->get("name"),
+            "description" => $request->get("description"), "list" => 0];
+
         $tasks[] = $newTask;
         $this->saveTasks($tasks);
 
@@ -41,7 +43,6 @@ class Controller extends AbstractController
     {
         $request = Request::createFromGlobals();
         $tasks = $this->loadTasks();
-
 
         foreach ($tasks as $nr => $task) {
             if ($task["id"] == $request->get("id")) {
@@ -62,11 +63,8 @@ class Controller extends AbstractController
      */
     public function taskOutput(Request $request)
     {
-
-
         return $this->json($this->loadTasks());
     }
-
 
     private function loadTasks()
     {
