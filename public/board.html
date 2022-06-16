@@ -11,73 +11,85 @@
 
 <div class="nav">
     <div>
+        <p id="boardname"></p>
     </div>
-
     <img class="logo" src="logo2.png" alt="logo">
-
     <div>
-    <p>Made by Lorenz</p>
+        <p id="username"></p>
     </div>
+
 
 </div>
 
 <div class="background">
 
 
-<section class="boardcreation">
-    <form>
-        <div class="input-group">
-            <label for="name">Taskname</label><br>
-            <input class="text" id="name" name="name" type="text"/>
-        </div>
+    <section class="boardcreation">
+        <form>
+            <div class="input-group">
+                <label for="name">Taskname</label><br>
+                <input class="text" id="name" name="name" type="text"/>
+            </div>
 
-        <div class="input-group">
-            <label for="description">Description</label><br>
-            <input class="text" id="description" name="description"/>
-        </div>
-        <br>
-        <button id="btn" type="submit">Create</button>
-    </form>
-</section>
-
-
-<!--
-<div class="results">
-    <pre></pre>
-</div>
--->
+            <div class="input-group">
+                <label for="description">Description</label><br>
+                <input class="text" id="description" name="description"/>
+            </div>
+            <br>
+            <button id="btn" type="submit">Create</button>
+        </form>
+    </section>
 
 
-<div class=list>
-
-    <div class="overlay">
-        <h2>TODO</h2>
-        <div class="todo container">
-
-
-        </div>
+    <!--
+    <div class="results">
+        <pre></pre>
     </div>
+    -->
 
-    <div class="overlay">
-        <h2>DOING</h2>
-        <div class="container">
 
+    <div class=list>
+
+        <div class="overlay">
+            <h2>TODO</h2>
+            <div class="todo container">
+
+
+            </div>
         </div>
-    </div>
 
-    <div class="overlay">
-        <h2>DONE</h2>
-        <div class="container">
+        <div class="overlay">
+            <h2>DOING</h2>
+            <div class="container">
 
+            </div>
         </div>
+
+        <div class="overlay">
+            <h2>DONE</h2>
+            <div class="container">
+
+            </div>
+        </div>
+
+
     </div>
-
-
-</div>
 
 </div>
 
 <script>
+
+
+    function getNames() {
+
+        const boardname = "Boardname: " + localStorage.getItem("boardname");
+        const username = "Username: " + localStorage.getItem("username");
+        document.getElementById("boardname").innerHTML = boardname;
+        document.getElementById("username").innerHTML = username;
+
+    }
+
+    getNames()
 
     const nameInput = document.getElementById("name");
     const descriptionInput = document.getElementById("description");
@@ -164,8 +176,8 @@
         })
     }
 
-    taskOutput();
 
+    taskOutput();
 
 </script>
 
@@ -190,7 +202,7 @@
         margin: 0;
         padding: 1%;
         text-align: center;
-        justify-content: space-between;
+        justify-content: space-evenly;
     }
 
 
@@ -203,17 +215,30 @@
         justify-content: center;
         align-items: baseline;
         align-content: stretch;
-        background-color: #d3d3d3;
-        border-radius: 35px;
+        background-color: #9a9a9a;
         margin-right: 30%;
         margin-left: 30%;
         margin-bottom: 10%;
         border: 1px solid black;
+    }
+
+    #btn {
+        justify-content: center;
 
     }
 
     .boardcreation button {
         justify-content: center;
+
+
+    }
+
+    @media (min-width: 768px) {
+        .button-43 {
+            padding: 1rem 2rem;
+        }
+    }
+
     }
 
     .text {
