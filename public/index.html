@@ -28,7 +28,10 @@
 
 
 </div>
-<button class="btn_create" onclick="window.location.href='boardCreation.html'">Create Todolist</button>
+
+<div class="buttonDiv">
+    <button class="btn_create" onclick="window.location.href='boardCreation.html'">Create Todolist</button>
+</div>
 
 
 <style>
@@ -36,12 +39,6 @@
         text-align: center;
     }
 
-    .btn_create {
-        text-align: center;
-        margin-left: 48%;
-        margin-right: 48%;
-        margin-top: 2%;
-    }
 
     body {
         background: rgb(10, 150, 241);
@@ -73,6 +70,31 @@
     .logo {
         width: 10%;
         height: auto;
+    }
+
+    .btn_create {
+        justify-content: center;
+        background-color: #1a3062;
+        border-radius: .5rem;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        font-size: 16px;
+        padding: 1rem 1.75rem;
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .buttonDiv {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        align-content: stretch;
     }
 </style>
 
