@@ -77,7 +77,7 @@
 
 <script>
 
-
+    //get the names from the localhost and write it in a <p> tag
     function getNames() {
 
         const boardname = "Boardname: " + localStorage.getItem("boardname");
@@ -89,12 +89,14 @@
 
     getNames()
 
+    //clear inputvalue
     const nameInput = document.getElementById("name");
     const descriptionInput = document.getElementById("description");
     nameInput.value = "";
     descriptionInput.value = "";
 
 
+    //get the input and deliver it to the Route "/new"
     function handleFormSubmit(event) {
         event.preventDefault();
 
@@ -112,11 +114,12 @@
         })
     }
 
+    //get the submit info
     const form = document.querySelector('.boardcreation');
     form.addEventListener('submit', handleFormSubmit);
     const lists = document.getElementsByClassName("container")
 
-
+    //push task in todolist
     function taskOutput() {
 
         fetch("/output", {method: "get"}).then(res => {

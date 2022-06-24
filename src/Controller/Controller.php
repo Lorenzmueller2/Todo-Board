@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class Controller extends AbstractController
 {
+    //path to JSON file
     const TASKS_JSON_PATH = __DIR__ . "/tasks.json";
 
     /**
@@ -20,6 +21,7 @@ class Controller extends AbstractController
         return $this->json($this->loadTasks());
     }
 
+    //save new task in JSON
     /**
      * @Route("/new", name="new")
      */
@@ -36,6 +38,8 @@ class Controller extends AbstractController
         return $this->json($tasks);
     }
 
+
+    //set task in list
     /**
      * @Route("/update", name="update")
      */
@@ -58,6 +62,8 @@ class Controller extends AbstractController
         return $this->json($tasks);
     }
 
+
+    //send data to javaScript
     /**
      * @Route("/output", name="output")
      */
@@ -66,6 +72,7 @@ class Controller extends AbstractController
         return $this->json($this->loadTasks());
     }
 
+    //get data from JSON
     private function loadTasks()
     {
         $contentArray = file_get_contents(self::TASKS_JSON_PATH);
@@ -73,6 +80,7 @@ class Controller extends AbstractController
         return json_decode($contentArray, true);
     }
 
+    //set data in JSON
     private function saveTasks($tasks)
     {
         $tasksAsJson = json_encode($tasks);
